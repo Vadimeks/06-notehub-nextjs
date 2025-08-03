@@ -1,8 +1,9 @@
 import axios from "axios";
-import type { Note, FetchNotesResponse } from "@/src/types/notes";
+import type { Note, FetchNotesResponse } from "@/types/notes";
 
+// Устанавіце базавы URL правільна. Эндпойнт API знаходзіцца ў корані.
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://notehub-public.goit.study/api";
+  process.env.NEXT_PUBLIC_API_URL || "https://notehub-public.goit.study";
 const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
 export const fetchNotes = async (
@@ -19,6 +20,7 @@ export const fetchNotes = async (
       params.search = search;
     }
     const response = await axios.get<FetchNotesResponse>(
+      // Выпраўлены шлях: толькі '/notes'
       `${API_BASE_URL}/notes`,
       {
         params,
@@ -27,13 +29,7 @@ export const fetchNotes = async (
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error("Fetch notes error:", {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status,
-      });
-    }
+    // ...
     throw error;
   }
 };
@@ -43,35 +39,27 @@ export const createNote = async (
 ): Promise<Note> => {
   try {
     const response = await axios.post<Note>(`${API_BASE_URL}/notes`, note, {
+      // Выпраўлены шлях
       headers: { Authorization: `Bearer ${TOKEN}` },
     });
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error("Create note error:", {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status,
-      });
-    }
+    // ...
     throw error;
   }
 };
 
 export const deleteNote = async (id: number): Promise<Note> => {
   try {
-    const response = await axios.delete<Note>(`${API_BASE_URL}/notes/${id}`, {
-      headers: { Authorization: `Bearer ${TOKEN}` },
-    });
+    const response = await axios.delete<Note>(
+      `${API_BASE_URL}/notes/${id}`, // Выпраўлены шлях
+      {
+        headers: { Authorization: `Bearer ${TOKEN}` },
+      }
+    );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error("Delete note error:", {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status,
-      });
-    }
+    // ...
     throw error;
   }
 };

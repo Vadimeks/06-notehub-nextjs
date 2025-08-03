@@ -4,8 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { createNote } from "@/lib/api/noteService";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Note } from "@/types/notes";
+
 import styles from "./NoteForm.module.css";
 import toast from "react-hot-toast";
 
