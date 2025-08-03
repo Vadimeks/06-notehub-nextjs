@@ -20,8 +20,7 @@ export const fetchNotes = async (
       params.search = search;
     }
     const response = await axios.get<FetchNotesResponse>(
-      // Выпраўлены шлях: толькі '/notes'
-      `${API_BASE_URL}/notes`,
+      `${API_BASE_URL}/api/notes`,
       {
         params,
         headers: { Authorization: `Bearer ${TOKEN}` },
@@ -38,8 +37,7 @@ export const createNote = async (
   note: Omit<Note, "id" | "createdAt" | "updatedAt">
 ): Promise<Note> => {
   try {
-    const response = await axios.post<Note>(`${API_BASE_URL}/notes`, note, {
-      // Выпраўлены шлях
+    const response = await axios.post<Note>(`${API_BASE_URL}/api/notes`, note, {
       headers: { Authorization: `Bearer ${TOKEN}` },
     });
     return response.data;
@@ -52,7 +50,7 @@ export const createNote = async (
 export const deleteNote = async (id: number): Promise<Note> => {
   try {
     const response = await axios.delete<Note>(
-      `${API_BASE_URL}/notes/${id}`, // Выпраўлены шлях
+      `${API_BASE_URL}/api/notes/${id}`,
       {
         headers: { Authorization: `Bearer ${TOKEN}` },
       }
