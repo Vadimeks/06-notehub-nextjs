@@ -1,8 +1,13 @@
+"use client";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import css from "./NoteForm.module.css";
-import { createNote } from "../../services/noteService";
+import { createNote } from "@/lib/api/noteService";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Note } from "@/types/notes";
+import styles from "./NoteForm.module.css";
+import toast from "react-hot-toast";
 
 interface NoteFormProps {
   onClose: () => void;
@@ -26,10 +31,11 @@ export default function NoteForm({ onClose }: NoteFormProps) {
     mutationFn: createNote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
+      toast.success("Note created successfully!");
       onClose();
     },
-    onError: (error) => {
-      console.error("Create note error:", error);
+    onError: (error: Error) => {
+      toast.error(`Error creating note: ${error.message}`);
     },
   });
 
@@ -48,35 +54,44 @@ export default function NoteForm({ onClose }: NoteFormProps) {
       }}
     >
       {({ isSubmitting }) => (
-        <Form className={css.form}>
-          <div className={css.formGroup}>
+        <Form className={styles.form}>
+          <div className={styles.formGroup}>
             <label htmlFor="note-title">Title</label>
             <Field
               id="note-title"
               name="title"
               type="text"
-              className={css.input}
+              className={styles.input}
             />
-            <ErrorMessage name="title" component="div" className={css.error} />
+            <ErrorMessage
+              name="title"
+              component="div"
+              className={styles.error}
+            />
           </div>
-          <div className={css.formGroup}>
+          <div className={styles.formGroup}>
             <label htmlFor="note-content">Content</label>
             <Field
               id="note-content"
               name="content"
               as="textarea"
-              className={css.textarea}
+              className={styles.textarea}
               rows={5}
             />
             <ErrorMessage
               name="content"
               component="div"
-              className={css.error}
+              className={styles.error}
             />
           </div>
-          <div className={css.formGroup}>
+          <div className={styles.formGroup}>
             <label htmlFor="note-tag">Tag</label>
-            <Field id="note-tag" name="tag" as="select" className={css.select}>
+            <Field
+              id="note-tag"
+              name="tag"
+              as="select"
+              className={styles.select}
+            >
               <option value="" disabled>
                 Select a tag
               </option>
@@ -86,19 +101,19 @@ export default function NoteForm({ onClose }: NoteFormProps) {
               <option value="Meeting">Meeting</option>
               <option value="Shopping">Shopping</option>
             </Field>
-            <ErrorMessage name="tag" component="div" className={css.error} />
+            <ErrorMessage name="tag" component="div" className={styles.error} />
           </div>
-          <div className={css.actions}>
+          <div className={styles.actions}>
             <button
               type="button"
-              className={css.cancelButton}
+              className={styles.cancelButton}
               onClick={onClose}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className={css.submitButton}
+              className={styles.submitButton}
               disabled={isSubmitting}
             >
               Create Note
