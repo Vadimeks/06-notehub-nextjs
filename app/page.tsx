@@ -11,7 +11,7 @@ import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
 import { fetchNotes } from "@/lib/api/noteService";
 import type { FetchNotesResponse } from "@/types/notes";
-import styles from "@/app/page.module.css";
+import styles from "./page.module.css";
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -48,40 +48,47 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.app}>
-      <header className={styles.toolbar}>
-        <SearchBox onSearch={handleSearch} />
-        {data && data.totalPages > 1 && (
-          <Pagination
-            pageCount={Math.min(data.totalPages, 4)}
-            onPageChange={handlePageChange}
-            currentPage={page}
-          />
-        )}
-        <button className={styles.button} onClick={handleOpenModal}>
-          Create note +
-        </button>
-      </header>
-      {isLoading && !data && <Loader />}
-      {isError && (
-        <div>
-          Error fetching notes: {error.message}
-          {error.message.includes("400") && (
-            <p>Check if the token is valid or try a different search query.</p>
+    // Ужо не трэба абгортваць <QueryClientProvider client={queryClient}>
+    <div>
+      <div className={styles.app}>
+        <header className={styles.toolbar}>
+          <SearchBox onSearch={handleSearch} />
+          {data && data.totalPages > 1 && (
+            <Pagination
+              pageCount={Math.min(data.totalPages, 4)}
+              onPageChange={handlePageChange}
+              currentPage={page}
+            />
           )}
-        </div>
-      )}
-      {data && data.notes && data.notes.length > 0 && (
-        <NoteList notes={data.notes} />
-      )}
-      {data && data.notes && data.notes.length === 0 && !isLoading && (
-        <p>No notes found.</p>
-      )}
-      {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-          <NoteForm onClose={handleCloseModal} />
-        </Modal>
-      )}
+          <button className={styles.button} onClick={handleOpenModal}>
+            Create note +
+          </button>
+        </header>
+        {isLoading && !data && <Loader />}
+        {isError && (
+          <div>
+            Error fetching notes: {error.message}
+            {error.message.includes("400") && (
+              <p>
+                Check if the token is valid or try a different search query.
+              </p>
+            )}
+          </div>
+        )}
+        {data && data.notes && data.notes.length > 0 && (
+          <NoteList notes={data.notes} />
+        )}
+        {data && data.notes && data.notes.length === 0 && !isLoading && (
+          <p>No notes found.</p>
+        )}
+        {isModalOpen && (
+          <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+            <NoteForm onClose={handleCloseModal} />
+          </Modal>
+        )}
+      </div>
     </div>
+    // І закрываць таксама не трэба
+    // </QueryClientProvider>
   );
 }
