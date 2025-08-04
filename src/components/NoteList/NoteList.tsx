@@ -24,7 +24,7 @@ export default function NoteList({ notes }: NoteListProps) {
     },
   });
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     mutation.mutate(id);
   };
 
@@ -40,7 +40,7 @@ export default function NoteList({ notes }: NoteListProps) {
           </p>
           <button
             className={styles.deleteButton}
-            onClick={() => handleDelete(Number(note.id))}
+            onClick={() => handleDelete(note.id)}
             disabled={mutation.isPending}
           >
             Delete
