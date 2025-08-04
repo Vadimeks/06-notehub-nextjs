@@ -5,6 +5,7 @@ import { deleteNote } from "@/lib/api/api";
 import type { Note } from "@/types/notes";
 import styles from "@/components/NoteList/NoteList.module.css";
 import toast from "react-hot-toast";
+import Link from "next/link"; // Імпарт кампанента Link
 
 interface NoteListProps {
   notes: Note[];
@@ -34,11 +35,10 @@ export default function NoteList({ notes }: NoteListProps) {
         <div key={note.id} className={styles.listItem}>
           <h3 className={styles.title}>{note.title}</h3>
           <p className={styles.content}>{note.content}</p>
-          {/* <p className={styles.tag}>{note.tag}</p> */}
           <div className={styles.footer}>
-            <p className={styles.date}>
-              Created: {new Date(note.createdAt).toLocaleDateString()}
-            </p>
+            <Link href={`/notes/${note.id}`} className={styles.link}>
+              View details
+            </Link>
             <button
               className={styles.button}
               onClick={() => handleDelete(note.id)}
