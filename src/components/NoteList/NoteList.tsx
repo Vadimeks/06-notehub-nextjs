@@ -29,22 +29,24 @@ export default function NoteList({ notes }: NoteListProps) {
   };
 
   return (
-    <div className={styles.noteList}>
+    <div className={styles.list}>
       {notes.map((note) => (
-        <div key={note.id} className={styles.noteCard}>
-          <h3>{note.title}</h3>
-          <p>{note.content}</p>
-          <p className={styles.tag}>{note.tag}</p>
-          <p className={styles.date}>
-            Created: {new Date(note.createdAt).toLocaleDateString()}
-          </p>
-          <button
-            className={styles.deleteButton}
-            onClick={() => handleDelete(note.id)}
-            disabled={mutation.isPending}
-          >
-            Delete
-          </button>
+        <div key={note.id} className={styles.listItem}>
+          <h3 className={styles.title}>{note.title}</h3>
+          <p className={styles.content}>{note.content}</p>
+          {/* <p className={styles.tag}>{note.tag}</p> */}
+          <div className={styles.footer}>
+            <p className={styles.date}>
+              Created: {new Date(note.createdAt).toLocaleDateString()}
+            </p>
+            <button
+              className={styles.button}
+              onClick={() => handleDelete(note.id)}
+              disabled={mutation.isPending}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
     </div>

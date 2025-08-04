@@ -1,9 +1,4 @@
-// app/page.tsx
-
-// Гэты файл адказвае за маршрут /
-// Тут мы пакідаем толькі разметку галоўнай старонкі з прывітаннем і апісаннем.
-
-import css from "./page.module.css"; // Пакідаем імпарт стыляў, калі вы іх скапіявалі.
+import css from "./page.module.css";
 
 export default function Home() {
   return (
