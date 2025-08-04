@@ -1,9 +1,22 @@
+// src/lib/api/api.ts
 import axios from "axios";
 import type { Note, FetchNotesResponse } from "@/types/notes";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://notehub-public.goit.study/api";
 const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
+
+// Новая функцыя для атрымання дэталяў адной нататкі па яе ID
+export const fetchNoteById = async (id: string): Promise<Note> => {
+  try {
+    const response = await axios.get<Note>(`${API_BASE_URL}/notes/${id}`, {
+      headers: { Authorization: `Bearer ${TOKEN}` },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const fetchNotes = async (
   page: number,
@@ -27,7 +40,6 @@ export const fetchNotes = async (
     );
     return response.data;
   } catch (error) {
-    // Кідаем памылку, каб яна дайшла да кампанента error.tsx
     throw error;
   }
 };
@@ -41,7 +53,6 @@ export const createNote = async (
     });
     return response.data;
   } catch (error) {
-    // Кідаем памылку, каб яна дайшла да кампанента error.tsx
     throw error;
   }
 };
@@ -53,7 +64,6 @@ export const deleteNote = async (id: string): Promise<Note> => {
     });
     return response.data;
   } catch (error) {
-    // Кідаем памылку, каб яна дайшла да кампанента error.tsx
     throw error;
   }
 };
