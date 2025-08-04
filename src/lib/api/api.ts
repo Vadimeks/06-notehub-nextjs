@@ -1,8 +1,6 @@
-// src/lib/api/noteService.ts
 import axios from "axios";
 import type { Note, FetchNotesResponse } from "@/types/notes";
 
-// Устанавіце базавы URL правільна. Ён павінен быць коранем, без шляху /api
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://notehub-public.goit.study/api";
 const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
@@ -20,7 +18,6 @@ export const fetchNotes = async (
     if (search) {
       params.search = search;
     }
-    // Вось тут галоўнае выпраўленне: шлях да API
     const response = await axios.get<FetchNotesResponse>(
       `${API_BASE_URL}/notes`,
       {
@@ -30,7 +27,7 @@ export const fetchNotes = async (
     );
     return response.data;
   } catch (error) {
-    // ...
+    // Кідаем памылку, каб яна дайшла да кампанента error.tsx
     throw error;
   }
 };
@@ -44,7 +41,7 @@ export const createNote = async (
     });
     return response.data;
   } catch (error) {
-    // ...
+    // Кідаем памылку, каб яна дайшла да кампанента error.tsx
     throw error;
   }
 };
@@ -56,7 +53,7 @@ export const deleteNote = async (id: string): Promise<Note> => {
     });
     return response.data;
   } catch (error) {
-    // ...
+    // Кідаем памылку, каб яна дайшла да кампанента error.tsx
     throw error;
   }
 };
