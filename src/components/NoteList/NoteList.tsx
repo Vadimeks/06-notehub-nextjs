@@ -5,7 +5,7 @@ import { deleteNote } from "@/lib/api/api";
 import type { Note } from "@/types/notes";
 import styles from "@/components/NoteList/NoteList.module.css";
 import toast from "react-hot-toast";
-import Link from "next/link"; // Імпарт кампанента Link
+import Link from "next/link";
 
 interface NoteListProps {
   notes: Note[];
@@ -36,6 +36,7 @@ export default function NoteList({ notes }: NoteListProps) {
           <h3 className={styles.title}>{note.title}</h3>
           <p className={styles.content}>{note.content}</p>
           <div className={styles.footer}>
+            {/* Дададзены Link, які вядзе на старонку з дэталямі */}
             <Link href={`/notes/${note.id}`} className={styles.link}>
               View details
             </Link>

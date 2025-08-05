@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header"; // Правільны імпарт па змаўчанні
 import Footer from "@/components/Footer/Footer"; // Правільны імпарт па змаўчанні
-import ReactQueryProvider from "@/app/providers/ReactQueryProvider";
+import ReactQueryProvider from "@/app/providers/TanStackProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
