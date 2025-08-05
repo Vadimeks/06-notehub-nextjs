@@ -23,20 +23,26 @@
       }
     ],
     "paths": {
+      // Зменены шлях, каб ён паказваў на корань праекта
       "@/*": [
-        "./src/*"
+        "./*"
       ],
       "@/app/*": [
         "./app/*"
       ]
     }
   },
+  // Абнавілі, каб уключыць усе неабходныя папкі ў корані
   "include": [
     "next-env.d.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx",
     "app/**/*.ts",
     "app/**/*.tsx",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "lib/**/*.ts",
+    "lib/**/*.tsx",
+    "types/**/*.ts",
+    "types/**/*.tsx",
     ".next/types/**/*.ts"
   ],
   "exclude": [
