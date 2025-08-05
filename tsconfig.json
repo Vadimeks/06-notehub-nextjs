@@ -39,11 +39,12 @@
     "app/**/*.tsx",
     "components/**/*.ts",
     "components/**/*.tsx",
-    "lib/**/*.ts",
-    "lib/**/*.tsx",
+    "lib1/**/*.ts",
+    "lib1/**/*.tsx",
     "types/**/*.ts",
     "types/**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "lib/api.ts"
   ],
   "exclude": [
     "node_modules"

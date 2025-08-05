@@ -9,7 +9,7 @@ import NoteList from "@/components/NoteList/NoteList";
 import Loader from "@/components/Loader/Loader";
 import Modal from "@/components/Modal/NoteModal";
 import NoteForm from "@/components/NoteForm/NoteForm";
-import { fetchNotes } from "@/lib/api/api";
+import { fetchNotes } from "@/lib/api";
 import type { FetchNotesResponse } from "@/types/note";
 import css from "./page.module.css";
 import { Toaster } from "react-hot-toast";
