@@ -10,7 +10,6 @@ export default function NoteDetailsClient() {
   const params = useParams();
   const id = params.id as string;
 
-  // Выкарыстоўваем useQuery для атрымання дэталяў нататкі
   const {
     data: note,
     isLoading,

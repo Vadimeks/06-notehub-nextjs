@@ -12,11 +12,9 @@ interface NoteDetailsPageProps {
 export default async function NoteDetailsPage({
   params,
 }: NoteDetailsPageProps) {
-  // Чакаем params асінхронна
   const { id } = await params;
   const queryClient = new QueryClient();
 
-  // Папярэдняя загрузка дадзеных на сэрверы
   await queryClient.prefetchQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),

@@ -30,7 +30,7 @@ export default function TanStackProvider({
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Замест Hydrate выкарыстоўваем HydrationBoundary */}
+      {}
       <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
     </QueryClientProvider>
   );

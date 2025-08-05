@@ -14,14 +14,12 @@ import type { FetchNotesResponse } from "@/types/notes";
 import css from "./page.module.css";
 import { Toaster } from "react-hot-toast";
 
-// Гэты кампанент цалкам змяшчае ўсю кліенцкую логіку
 export default function NotesClient() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [debouncedQuery] = useDebounce(query, 500);
 
-  // Выкарыстанне хука useQuery для атрымання дадзеных
   const { data, isLoading, isError, error } = useQuery<
     FetchNotesResponse,
     Error
