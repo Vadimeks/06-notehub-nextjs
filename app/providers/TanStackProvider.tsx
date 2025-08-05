@@ -13,7 +13,7 @@ interface ReactQueryProviderProps {
   dehydratedState?: DehydratedState;
 }
 
-export default function ReactQueryProvider({
+export default function TanStackProvider({
   children,
   dehydratedState,
 }: ReactQueryProviderProps) {

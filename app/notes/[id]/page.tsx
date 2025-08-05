@@ -1,9 +1,32 @@
-// app/notes/[id]/page.tsx
+import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { fetchNoteById } from "@/lib/api/api";
+import NoteDetailsClient from "@/app/notes/NoteDetails.client";
+import TanStackProvider from "@/app/providers/TanStackProvider";
 
-export default function NoteDetailPage() {
+interface NoteDetailsPageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function NoteDetailsPage({
+  params,
+}: NoteDetailsPageProps) {
+  // Чакаем params асінхронна
+  const { id } = await params;
+  const queryClient = new QueryClient();
+
+  // Папярэдняя загрузка дадзеных на сэрверы
+  await queryClient.prefetchQuery({
+    queryKey: ["note", id],
+    queryFn: () => fetchNoteById(id),
+  });
+
+  const dehydratedState = dehydrate(queryClient);
+
   return (
-    <div>
-      <h1>Тут будзе старонка з дэталямі нататкі</h1>
-    </div>
+    <TanStackProvider dehydratedState={dehydratedState}>
+      <NoteDetailsClient />
+    </TanStackProvider>
   );
 }
