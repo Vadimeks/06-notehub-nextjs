@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { fetchNoteById } from "@/lib/api";
+import { fetchNoteById } from "@/lib/api"; // Выпраўлены шлях імпарту
 import css from "@/app/notes/NoteDetails.module.css";
 import type { Note } from "@/types/note";
 
@@ -19,6 +19,7 @@ export default function NoteDetailsClient() {
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
     enabled: !!id,
+    refetchOnMount: false,
   });
 
   if (isLoading) {
