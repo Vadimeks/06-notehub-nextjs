@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import css from "@/components/Modal/NoteModal.module.css";
+import css from "@/components/Modal/Modal.module.css";
 
 interface ModalProps {
   isOpen: boolean;
