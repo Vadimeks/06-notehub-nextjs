@@ -37,6 +37,8 @@ export default function NotesClient({ initialNotesData }: NotesClientProps) {
     refetchOnMount: false,
   });
 
+  console.log("Data from useQuery:", data);
+
   const handleSearch = (searchQuery: string) => {
     setQuery(searchQuery);
     setPage(1);
@@ -83,10 +85,10 @@ export default function NotesClient({ initialNotesData }: NotesClientProps) {
           </div>
         )}
         {}
-        {data && data.items && data.items.length > 0 && (
-          <NoteList notes={data.items} />
+        {data && data.notes && data.notes.length > 0 && (
+          <NoteList notes={data.notes} />
         )}
-        {data && data.items && data.items.length === 0 && !isLoading && (
+        {data && data.notes && data.notes.length === 0 && !isLoading && (
           <p>No notes found.</p>
         )}
         {isModalOpen && (
