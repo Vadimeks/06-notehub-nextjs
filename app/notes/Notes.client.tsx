@@ -10,11 +10,15 @@ import Loader from "@/components/Loader/Loader";
 import Modal from "@/components/Modal/NoteModal";
 import NoteForm from "@/components/NoteForm/NoteForm";
 import { fetchNotes } from "@/lib/api";
-import type { FetchNotesResponse } from "@/types/note";
+import type { FetchNotesResponse } from "@/types/api";
 import css from "./page.module.css";
 import { Toaster } from "react-hot-toast";
 
-export default function NotesClient() {
+interface NotesClientProps {
+  initialNotesData: FetchNotesResponse;
+}
+
+export default function NotesClient({ initialNotesData }: NotesClientProps) {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,6 +33,8 @@ export default function NotesClient() {
     enabled: true,
     placeholderData: keepPreviousData,
     retry: 1,
+    initialData: initialNotesData,
+    refetchOnMount: false,
   });
 
   const handleSearch = (searchQuery: string) => {
@@ -76,10 +82,11 @@ export default function NotesClient() {
             )}
           </div>
         )}
-        {data && data.notes && data.notes.length > 0 && (
-          <NoteList notes={data.notes} />
+        {}
+        {data && data.items && data.items.length > 0 && (
+          <NoteList notes={data.items} />
         )}
-        {data && data.notes && data.notes.length === 0 && !isLoading && (
+        {data && data.items && data.items.length === 0 && !isLoading && (
           <p>No notes found.</p>
         )}
         {isModalOpen && (
