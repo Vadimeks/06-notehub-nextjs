@@ -14,11 +14,14 @@ import type { FetchNotesResponse } from "@/types/api";
 import css from "./page.module.css";
 import { Toaster } from "react-hot-toast";
 
-interface NotesClientProps {
-  initialNotesData: FetchNotesResponse;
-}
+// Больш не патрэбны інтэрфейс NotesClientProps, бо initialNotesData не выкарыстоўваецца.
+// interface NotesClientProps {
+//   initialNotesData: FetchNotesResponse;
+// }
 
-export default function NotesClient({ initialNotesData }: NotesClientProps) {
+// Выдаляем initialNotesData з пропсаў
+export default function NotesClient() {
+  // initialNotesData больш не прымаецца
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +36,7 @@ export default function NotesClient({ initialNotesData }: NotesClientProps) {
     enabled: true,
     placeholderData: keepPreviousData,
     retry: 1,
-    initialData: initialNotesData,
+    // initialData: initialNotesData, // Застаецца выдаленым, бо ён выклікаў праблемы
     refetchOnMount: false,
   });
 
@@ -82,7 +85,6 @@ export default function NotesClient({ initialNotesData }: NotesClientProps) {
             )}
           </div>
         )}
-        {}
         {data && data.notes && data.notes.length > 0 && (
           <NoteList notes={data.notes} />
         )}
