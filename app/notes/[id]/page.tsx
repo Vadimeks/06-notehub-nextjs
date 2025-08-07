@@ -6,7 +6,7 @@ import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 export default async function NoteDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
 
