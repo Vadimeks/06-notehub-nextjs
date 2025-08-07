@@ -8,7 +8,7 @@ export default async function NoteDetailsPage({
 }: {
   params: { id: string };
 }) {
-  const { id } = params;
+  const { id } = await params;
 
   const queryClient = new QueryClient();
 
